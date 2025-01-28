@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+.news-item img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+.news-item footer {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+}
+.down-section {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+/* Custom divider style */
+.news-divider {
+    border-bottom: 2px solid #ddd;
+    margin: 30px 0;
+}
