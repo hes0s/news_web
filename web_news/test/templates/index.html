@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Latest News!</h1>
+    {%for item in news %}
+    <h2>{{ item[0] }}</h2> <!--Name-->
+    <h3>{{ item[1] }}</h3> <!--Description-->
+    <img src="{{ item[2] }}" alt="News image" width="300">
+    {%endfor%}
+</body>
+</html>
