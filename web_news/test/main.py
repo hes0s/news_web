@@ -10,7 +10,6 @@ cursor = conn.cursor()
 def home():
     cursor.execute("SELECT Name, Description, img_url FROM news_info")
     news = cursor.fetchall()
-
     return render_template("index.html", news=news)
 
 
