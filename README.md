@@ -1,0 +1,1 @@
+Proiectul este despre un web site cu stiri. Site-ul este conceput in general pentru utilizare de catre un om care va adauga stiri pe site prin intermediul unui telegram bot care va strange informatia si o va trimite pe site 
