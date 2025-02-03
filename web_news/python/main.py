@@ -2,17 +2,16 @@ import aiogram
 from aiogram import F, types
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
-from aiogram.types import ContentType
+from aiogram.types import Message, PhotoSize
 from aiogram import Dispatcher, Bot
 import asyncio
-from aiogram.filters import CommandStart, Command
-from aiogram.types import Message, PhotoSize
 import logging
-from db import conn, cursor
+import os
+from db import conn, cursor  # Assuming your db connection is in 'db.py'
 
 import kbs as kb
 
-bot = Bot("7910281070:AAGWK1H3xMzxtVsrHH6t_BM_wDe7Ls4KR4o")
+bot = Bot("7910281070:AAGWK1H3xMzxtVsrHH6t_BM_wDe7Ls4KR4o")  # Use your actual bot token
 dp = Dispatcher()
 
 # FSM States
@@ -21,12 +20,12 @@ class Form_FMS(StatesGroup):
     description = State()
     photo = State()
 
-@dp.message(CommandStart())
+@dp.message(aiogram.filters.CommandStart())
 async def cmd_start(message: Message):
     await message.answer("Hello, look down", reply_markup=kb.adr)
 
 # Start FSM Process
-@dp.message(Command(commands=["Add"]))
+@dp.message(aiogram.filters.Command(commands=["Add"]))
 async def add(message: Message, state: FSMContext):
     await state.set_state(Form_FMS.name)
     await message.answer("Enter name")
@@ -48,20 +47,31 @@ async def process_description(message: Message, state: FSMContext):
 # Process Photo
 @dp.message(Form_FMS.photo, F.content_type == types.ContentType.PHOTO)
 async def process_photo(message: Message, state: FSMContext):
-    data = await state.get_data()  
+    data = await state.get_data()  # Retrieve saved name and description
 
     name = data.get("name")
     description = data.get("description")
-    file_id = message.photo[-1].file_id  
+    file_id = message.photo[-1].file_id  # Use the last photo size (highest quality)
 
-    
     file = await bot.get_file(file_id)
     file_path = file.file_path
-    photo = await bot.download_file(file_path)
 
+    # Define a local directory where images will be stored
+    save_dir = 'static/images/'
     
+    # Make sure the directory exists
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+    
+    # Define the full path where the image will be saved, adding .jpg extension
+    image_path = os.path.join(save_dir, f"{file_id}.jpg")  # Add .jpg extension
+    
+    # Download the file and save it locally
+    await bot.download_file(file_path, image_path)
+
+    # Store the relative path of the image in the database
     cursor.execute("INSERT INTO news_info (Name, Description, img_url) VALUES (%s, %s, %s)",
-                   (name, description, file_id))
+                   (name, description, f"images/{file_id}.jpg"))  # Store relative path with .jpg extension
     conn.commit()
 
     await message.answer("News added successfully! ✅")
