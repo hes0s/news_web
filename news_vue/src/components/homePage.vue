@@ -1,15 +1,16 @@
 <template> 
-<div class="container">
-    <h1>home</h1>
-<router-link to="/new">new</router-link>
-</div>
-
+<Navbar/>
 </template>
 
 <script> 
-export default { 
-    name: 'homePage'
-}
+import Navbar from '@/views/navbar.vue'
+
+export default {
+    name: 'homePage',
+  components: {
+    Navbar, // Register the component
+  },
+};
 </script>
 
 <style scoped> 
