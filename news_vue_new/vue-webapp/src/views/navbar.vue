@@ -30,7 +30,7 @@ export default {
           <button
             class="btn btn-outline-success"
             type="submit"
-            @click="$router.push('/registerPage')"
+            @click="$router.push('/register')"
           >
             Register
           </button>
