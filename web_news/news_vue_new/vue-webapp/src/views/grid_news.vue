@@ -5,6 +5,7 @@ export default {
 </script>
 
 <template>
+  <div class="all">
   <div class="card mb-3 mx-auto mt-5" style="width: 800px; height: 500px">
     <img src="..." class="card-img-top" alt="..." />
     <div class="card-body">
@@ -52,4 +53,5 @@ export default {
       </div>
     </div>
   </div>
+</div>
 </template>
