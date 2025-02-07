@@ -1,6 +1,8 @@
 <template>
+  <div class="all">
   <Navbar />
   <grid_news />
+  </div>
 </template>
 
 <script>
