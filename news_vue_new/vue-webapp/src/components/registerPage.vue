@@ -1,11 +1,9 @@
 <template>
   <Navbar />
-  <h3>Registration</h3>
+  
   <div class="registrationForm">
     <form>
-      <div class="mb-3">
-        <h3>Registration</h3>
-      </div>
+      <h3>Registration</h3>
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>
         <input type="text" class="form-control" id="username" aria-describedby="emailHelp" />
@@ -40,3 +38,12 @@ export default {
   name: 'registerPage',
 }
 </script>
+
+<style scoped>
+.registrationForm {
+  margin: 0 auto ;
+  width: 500px;
+  margin-top: 100px;
+}
+
+</style>
