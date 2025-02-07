@@ -27,8 +27,10 @@ async def cmd_start(message: Message):
 # Start FSM Process
 @dp.message(aiogram.filters.Command(commands=["Add"]))
 async def add(message: Message, state: FSMContext):
+    await message.text("You entered in adding mode, please folow the instructions")
     await state.set_state(Form_FMS.name)
     await message.answer("Enter name")
+
 
 # Process Name
 @dp.message(Form_FMS.name)

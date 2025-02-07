@@ -5,6 +5,6 @@ main = ReplyKeyboardMarkup(keyboard=[   # main keyboard
 ])
 
 adr = ReplyKeyboardMarkup(keyboard=[
-    [KeyboardButton(text='Rewiew'), KeyboardButton(text='Add')],
+    [KeyboardButton(text='Rewiew'), KeyboardButton(text='/Add')],
     [KeyboardButton(text='Return to main page')]
 ])
