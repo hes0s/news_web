@@ -2,16 +2,11 @@
 export default {
   name: 'Navbar',
 }
-import homePage from '../components/homePage.vue'
 </script>
 
 <template>
   <nav class="navbar navbar-expand-lg bg-dark-subtle pb-5 ">
     <div class="container-fluid ">
-<<<<<<< HEAD
-=======
-      <a class="navbar-brand" href="#">Navbar</a>
->>>>>>> 4fcea2976ed55e5c6628838deab5f2527571a783
       <button
         class="navbar-toggler bg-light-subtle"
         type="button"
@@ -27,11 +22,7 @@ import homePage from '../components/homePage.vue'
         <ul class="navbar-nav">
           <li class="navbar-band" id="nav_log">
           <button
-<<<<<<< HEAD
             class="btn btn-secondary  mx-2"
-=======
-            class="navbar-brand btn btn-secondary mx-2"
->>>>>>> 4fcea2976ed55e5c6628838deab5f2527571a783
             type="submit"
             @click="$router.push('/')"
           >
@@ -40,13 +31,9 @@ import homePage from '../components/homePage.vue'
           </li>
         </ul>
         <div class="d-flex container-fluid" id="nav_log">
-<<<<<<< HEAD
           <button class="btn btn-secondary mx-2"
             type="submit"
             @click="$router.push('/login')" >Login</button>
-=======
-          <button class="btn btn-secondary mx-2" type="submit">Login</button>
->>>>>>> 4fcea2976ed55e5c6628838deab5f2527571a783
           <button
             class="btn btn-secondary mx-2"
             type="submit"
