@@ -1,6 +1,6 @@
 <template>
   <div class="all">
-    <Navbar />
+  <navbar />                                                                                                                                                                                                                                              
 
   <div class="registrationForm">
     <form>
@@ -23,26 +23,33 @@
         >
         <input type="password" class="form-control" id="confirmPassword" />
       </div>
+      <div class="mb3">
+      <button class="btn btn-secondary mx-2 btn-lg hw" type="submit">Confirm</button>
+    </div>
     </form>
   </div>
   </div>
 </template>
 
 <script>
-import Navbar from '../views/navbar.vue'
+import navbar from '../views/navbar.vue'
 export default {
+  components: { navbar },
   name: 'registerPage',
 }
 </script>
 
 <style scoped>
 .registrationForm {
-  background-color: bisque;
+  background-color: gray;
   border-radius: 10%;
   margin: 0 auto ;
   width: 500px;
   padding: 50px;
   margin-top: 100px;
 }
-
+.hw{
+      margin: auto;
+      width: 380px;
+}
 </style>

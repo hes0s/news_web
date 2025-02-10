@@ -2,14 +2,15 @@
 export default {
   name: 'Navbar',
 }
+import homePage from '../components/homePage.vue'
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
+  <nav class="navbar navbar-expand-lg bg-dark-subtle pb-5 ">
+    <div class="container-fluid ">
       <a class="navbar-brand" href="#">Navbar</a>
       <button
-        class="navbar-toggler"
+        class="navbar-toggler bg-light-subtle"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#navbarNavDropdown"
@@ -19,16 +20,22 @@ export default {
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <div class="collapse navbar-collapse bg-dark-subtle" id="navbarNavDropdown">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <li class="navbar-band" id="nav_log">
+          <button
+            class="navbar-brand btn btn-secondary mx-2"
+            type="submit"
+            @click="$router.push('/')"
+          >
+            Home
+          </button>
           </li>
         </ul>
         <div class="d-flex container-fluid" id="nav_log">
-          <button class="btn btn-outline-success mx-2" type="submit">Login</button>
+          <button class="btn btn-secondary mx-2" type="submit">Login</button>
           <button
-            class="btn btn-outline-success"
+            class="btn btn-secondary mx-2"
             type="submit"
             @click="$router.push('/register')"
           >
@@ -43,5 +50,8 @@ export default {
 <style scoped>
 #nav_log {
   justify-content: flex-end;
+}
+.bg-dark-subtle{
+  border-radius: 20px;
 }
 </style>
