@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'grid_news',
+  name: 'GridNews',
 }
 </script>
 
