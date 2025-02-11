@@ -6,14 +6,7 @@ const message = ref('Hello, Vue!');
 
 <template>
   <div id="app">
-    <h1>{{ message }}</h1>
+    
     <router-view /> <!-- If using Vue Router -->
   </div>
 </template>
-
-<style>
-#app {
-  text-align: center;
-  font-family: Arial, sans-serif;
-}
-</style>
