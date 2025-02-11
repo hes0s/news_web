@@ -1,7 +1,13 @@
 <template>
   <div class="all">
   <Navbar />
+  <div class="text-center mt-2">
+    <h1>NewsWeb</h1>
+  </div>
   <grid_news />
+
+
+  
   </div>
 </template>
 
@@ -21,5 +27,10 @@ export default {
 <style scoped>
 .container {
   background-color: aqua;
+}
+
+.Maintext {
+  display: flex;
+  left: 50%;
 }
 </style>
