@@ -2,20 +2,13 @@ import pymysql
 
 # Establish a connection
 conn = pymysql.connect(
-    host="localhost",
-    user="root",
-    password="root",
-    database="news"
+    host="sql311.infinityfree.com",
+    user="if0_38291971",
+    password="G2EqQzOrvL0xd",
+    database="if0_38291971_wweb_news_site"
 )
 
 cursor = conn.cursor()
-cursor.execute("""
-    CREATE TABLE IF NOT EXISTS users (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        telegram_id BIGINT UNIQUE NOT NULL,
-        username VARCHAR(255)
-    )
-""")
 for table in cursor:
     print(table)
 

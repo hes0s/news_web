@@ -4,7 +4,8 @@
   <div class="text-center mt-2">
     <h1>NewsWeb</h1>
   </div>
-  <grid_news />
+
+  <GridNews />
 
 
   
@@ -12,14 +13,14 @@
 </template>
 
 <script>
-import Navbar from '@/views/navbar.vue'
-import grid_news from '@/views/grid_news.vue'
+import Navbar from"@/views/navbar.vue";
+import GridNews from "@/views/grid_news.vue";
 
 export default {
   name: 'homePage',
   components: {
     Navbar,
-    grid_news // Register the components
+    GridNews // Register the components
   },
 };
 </script>
