@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-lg bg-dark-subtle pb-5 ">
+  <nav class="navbar navbar-expand-lg bg-dark-subtle pb-2 rounded-bottom">
     <div class="container-fluid ">
       <button
         class="navbar-toggler bg-light-subtle"
@@ -51,7 +51,5 @@ export default {
 #nav_log {
   justify-content: flex-end;
 }
-.bg-dark-subtle{
-  border-radius: 20px;
-}
+
 </style>

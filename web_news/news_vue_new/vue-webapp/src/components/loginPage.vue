@@ -2,7 +2,7 @@
     <div class="all">
     <navbar />                                                                                                                                                                                                                                              
   
-    <div class="loginForm">
+    <div class="loginForm bg-dark-subtle">
       <form>
         <h3>Login</h3>
         <div class="mb-3">
@@ -31,7 +31,6 @@
   
   <style scoped>
   .loginForm {
-    background-color: gray;
     border-radius: 10%;
     margin: 0 auto ;
     width: 500px;

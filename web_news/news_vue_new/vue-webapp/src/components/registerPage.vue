@@ -2,7 +2,7 @@
   <div class="all">
   <navbar />                                                                                                                                                                                                                                              
 
-  <div class="registrationForm">
+  <div class="registrationForm bg-dark-subtle">
     <form>
       <h3>Registration</h3>
       <div class="mb-3">
@@ -41,7 +41,6 @@ export default {
 
 <style scoped>
 .registrationForm {
-  background-color: gray;
   border-radius: 10%;
   margin: 0 auto ;
   width: 500px;
