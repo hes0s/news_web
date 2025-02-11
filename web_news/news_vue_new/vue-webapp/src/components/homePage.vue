@@ -1,28 +1,28 @@
+<script>
+import navbar from"@/views/navbar.vue"
+import grid_news from "@/views/grid_news.vue";
+
+export default {
+  components: {
+    navbar,
+    grid_news,
+  },
+  name: 'homePage',
+};
+</script>
 <template>
   <div class="all">
-  <Navbar />
+  <navbar />
   <div class="text-center mt-2">
     <h1>NewsWeb</h1>
   </div>
-  <grid_news />
 
+  <GridNews />
 
-  
   </div>
 </template>
 
-<script>
-import Navbar from '@/views/navbar.vue'
-import grid_news from '@/views/grid_news.vue'
 
-export default {
-  name: 'homePage',
-  components: {
-    Navbar,
-    grid_news // Register the components
-  },
-};
-</script>
 
 <style scoped>
 .container {
