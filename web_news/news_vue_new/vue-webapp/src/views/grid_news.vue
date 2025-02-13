@@ -7,7 +7,7 @@ export default {
 <template>
   <div class="all">
   <div class="card mb-3 mx-auto mt-5" style="width: 800px; height: 500px">
-    <img src="..." class="card-img-top" alt="..." />
+    <img src="./aboba.jpg" class="card-img-top"/>
     <div class="card-body">
       <h4 class="card-sub-title">Noutatea zilei</h4>
       <h5 class="card-title">Card title</h5>
@@ -21,7 +21,7 @@ export default {
   <div class="row row-cols-1 row-cols-md-3 g-4 mx-auto" style="width: 800px">
     <div class="col">
       <div class="card h-100">
-        <img src="..." class="card-img-top" alt="..." />
+        <img src="./aboba.jpg" class="card-img-top" />
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
           <p class="card-text">
@@ -33,7 +33,7 @@ export default {
     </div>
     <div class="col">
       <div class="card h-100">
-        <img src="..." class="card-img-top" alt="..." />
+        <img src="./aboba.jpg" class="card-img-top"/>
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
           <p class="card-text">This is a short card.</p>
@@ -42,7 +42,7 @@ export default {
     </div>
     <div class="col">
       <div class="card h-100">
-        <img src="..." class="card-img-top" alt="..." />
+        <img src="./aboba.jpg" class="card-img-top"/>
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
           <p class="card-text">
