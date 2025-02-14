@@ -1,11 +1,11 @@
 <script>
 import navbar from"@/views/navbar.vue"
-import grid_news from "@/views/grid_news.vue";
+import GridNews from "@/views/grid_news.vue";
 
 export default {
   components: {
     navbar,
-    grid_news,
+    GridNews,
   },
   name: 'homePage',
 };
