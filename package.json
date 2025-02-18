@@ -1,0 +1,24 @@
+{
+  "name": "news_web",
+  "version": "1.0.0",
+  "description": "Proiectul este despre un web site cu stiri. Site-ul este conceput in general pentru utilizare de catre un om care va adauga stiri pe site prin intermediul unui telegram bot care va strange informatia si o va trimite pe site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hes0s/news_web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hes0s/news_web/issues"
+  },
+  "homepage": "https://github.com/hes0s/news_web#readme",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "vite": "^6.1.0"
+  }
+}
