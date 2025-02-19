@@ -2,7 +2,7 @@
   <div class="all">
     <!-- Highlight the Latest News -->
     <div  class="card mb-3 mx-auto mt-5" style="width: 800px; height: 500px">
-      <img src="aboba.jpg" class="card-img-top" alt="Latest News Photo" />
+      <img src="./aboba.jpg" class="card-img-top" alt="Latest News Photo" />
       <div class="card-body">
         <h4 class="card-sub-title">Noutatea zilei</h4>
         <h5 class="card-title"></h5>
@@ -15,10 +15,10 @@
     <div class="row row-cols-1 row-cols-md-3 g-4 mx-auto" style="width: 800px">
       <div class="col">
         <div class="card h-100">
-          <img :src="news.photo" class="card-img-top" alt="News Photo" />
+          <img src="./aboba.jpg" class="card-img-top" alt="News Photo" />
           <div class="card-body">
-            <h5 class="card-title"></h5>
-            <p class="card-text"></p>
+            <h5 class="card-title">Title</h5>
+            <p class="card-text">Text</p>
           </div>
         </div>
       </div>
@@ -28,11 +28,7 @@
 
 <script>
 export default {
-  name: "GridNews",
-mounted() {
-    this.fetchNews();
-  },
-};
+  name: "GridNews"}
 </script>
 
 <style>
