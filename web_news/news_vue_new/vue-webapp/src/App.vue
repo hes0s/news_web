@@ -6,7 +6,6 @@ const message = ref('Hello, Vue!');
 
 <template>
   <div id="app">
-    
     <router-view /> <!-- If using Vue Router -->
   </div>
 </template>

@@ -27,7 +27,7 @@ const newsSchema = new mongoose.Schema({
 const News = mongoose.model("News", newsSchema);
 
 // 📌 API Route to Get All News
-app.get("/news", async (req, res) => {
+app.get("/info", async (req, res) => {
   try {
     const news = await News.find();
     res.json(news);
@@ -37,7 +37,7 @@ app.get("/news", async (req, res) => {
 });
 
 // 📌 API Route to Add News (Optional)
-app.post("/news", async (req, res) => {
+app.post("/info", async (req, res) => {
   try {
     const newNews = new News(req.body);
     await newNews.save();

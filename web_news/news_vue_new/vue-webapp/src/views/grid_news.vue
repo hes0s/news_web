@@ -1,24 +1,24 @@
 <template>
   <div class="all">
-    <!-- Highlighted News (Latest News) -->
-    <div v-if="latestNews" class="card mb-3 mx-auto mt-5" style="width: 800px; height: 500px">
-      <img :src="latestNews.photo" class="card-img-top" alt="News Image" />
+    <!-- Highlight the Latest News -->
+    <div v-if="items.length > 0" class="card mb-3 mx-auto mt-5" style="width: 800px; height: 500px">
+      <img :src="items[0].photo" class="card-img-top" alt="Latest News Photo" />
       <div class="card-body">
         <h4 class="card-sub-title">Noutatea zilei</h4>
-        <h5 class="card-title">{{ latestNews.name }}</h5>
-        <p class="card-text">{{ latestNews.description }}</p>
+        <h5 class="card-title">{{ items[0].name }}</h5>
+        <p class="card-text">{{ items[0].description }}</p>
         <p class="card-text"><small class="text-body-secondary">Last updated just now</small></p>
       </div>
     </div>
 
-    <!-- News Grid -->
+    <!-- Grid of Other News -->
     <div class="row row-cols-1 row-cols-md-3 g-4 mx-auto" style="width: 800px">
-      <div v-for="article in newsList" :key="article._id" class="col">
+      <div v-for="(news, index) in items.slice(1)" :key="index" class="col">
         <div class="card h-100">
-          <img :src="article.photo" class="card-img-top" alt="News Image" />
+          <img :src="news.photo" class="card-img-top" alt="News Photo" />
           <div class="card-body">
-            <h5 class="card-title">{{ article.name }}</h5>
-            <p class="card-text">{{ article.description }}</p>
+            <h5 class="card-title">{{ news.name }}</h5>
+            <p class="card-text">{{ news.description }}</p>
           </div>
         </div>
       </div>
@@ -32,28 +32,22 @@ import axios from "axios";
 
 export default {
   name: "GridNews",
-  setup() {
-    const newsList = ref([]); // All news articles
-    const latestNews = ref(null); // The latest news article
-
-    const fetchNews = async () => {
-      try {
-        const response = await axios.get("https://news-web-79f6.onrender.com"); // REPLACE WITH YOUR API URL
-        newsList.value = response.data;
-
-        // Assign the latest news (first in the array)
-        if (newsList.value.length > 0) {
-          latestNews.value = newsList.value[0];
-          newsList.value = newsList.value.slice(1); // Remove the latest from the list
-        }
-      } catch (error) {
-        console.error("Error fetching news:", error);
-      }
+  
+  data() {
+    return {
+      newsList: [],
     };
+  },
 
-    onMounted(fetchNews);
+  methods: {
+    async fetchNews() {
+      const response = await axios.get("http://localhost:3000/news");
+      this.newsList = response.data;
+    },
+  },
 
-    return { newsList, latestNews };
+  mounted() {
+    this.fetchNews();
   },
 };
 </script>
