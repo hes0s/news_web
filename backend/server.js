@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 const app = express();
 app.use(cors({ 
-    origin: "https://rainbow-cuchufli-46a42d.netlify.app", // ✅ Allow your Netlify frontend
+    origin: "*", // ✅ Allow your Netlify frontend
     methods: "GET,POST,PUT,DELETE", 
     credentials: true 
   }));
