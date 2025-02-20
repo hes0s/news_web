@@ -1,7 +1,10 @@
 <script setup>
 import { ref } from 'vue';
-axios.get("https://your-backend.railway.app/news")
+import axios from 'axios';
 const message = ref('Hello, Vue!');
+axios.get('https://your-backend.railway.app/news')
+  .then(response => console.log(response.data))
+  .catch(error => console.error(error));
 </script>
 
 <template>
