@@ -5,8 +5,12 @@ import dotenv from 'dotenv';
 //set up express
 dotenv.config();
 const app = express();
-app.use (cors());
-app.use(express.json());
+app.use(cors({ 
+    origin: "https://rainbow-cuchufli-46a42d.netlify.app", // ✅ Allow your Netlify frontend
+    methods: "GET,POST,PUT,DELETE", 
+    credentials: true 
+  }));
+  
 
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
