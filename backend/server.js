@@ -22,6 +22,10 @@ app.get("/", (req, res) => {
   res.send("Server is running and CORS is fixed!");
 });
 
+app.get("/favivon.ico", (req, res) => {
+  res.send("favicon.ico");
+});
+
 app.get("/news", (req, res) => {
   res.json([{ id: 1, title: "News Title", description: "Example news item" }]);
 });
