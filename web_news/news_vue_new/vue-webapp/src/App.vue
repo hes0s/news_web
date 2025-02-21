@@ -2,13 +2,13 @@
 import { ref } from 'vue';
 import axios from 'axios';
 const message = ref('Hello, Vue!');
-axios.get('https://your-backend.railway.app/news')
+axios.get('https://newsweb-production-1f35.up.railway.app')
   .then(response => console.log(response.data))
   .catch(error => console.error(error));
 </script>
 
 <template>
-  <div id="app">§
+  <div id="app">
     <router-view /> <!-- If using Vue Router -->
   </div>
 </template>
