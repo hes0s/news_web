@@ -26,5 +26,5 @@ app.get("/news", (req, res) => {
   res.json([{ id: 1, title: "News Title", description: "Example news item" }]);
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
