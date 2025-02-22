@@ -17,26 +17,37 @@
         <label for="password" class="form-label">Password</label>
         <input type="password" class="form-control" id="password" />
       </div>
-      <div class="mb-3">
-        <label for="confirmPassword" class="form-label" alt="confirmPassword"
-          >Confirm Password</label
-        >
-        <input type="password" class="form-control" id="confirmPassword" />
-      </div>
       <div class="mb3">
-      <button class="btn btn-secondary mx-2 btn-lg hw" type="submit">Confirm</button>
     </div>
     </form>
+    <button class="btn btn-secondary mx-2 btn-lg hw" @click="register">Confirm</button>
+
   </div>
   </div>
 </template>
 
 <script>
 import navbar from '../views/navbar.vue'
+import AuthentificationService from '../../services/AuthentificationService.js'
 export default {
   components: { navbar },
   name: 'registerPage',
+
+  methods: {
+    async register() {
+      
+      const respone = await AuthentificationService.register({
+        email: this.email,
+        username: this.username
+
+      });
+      console.log("register done");
+      console.log(respone);
+    }    
+  }
+
 }
+
 </script>
 
 <style scoped>
