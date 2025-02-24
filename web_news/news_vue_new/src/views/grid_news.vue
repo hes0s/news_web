@@ -16,9 +16,9 @@
       <div class="col">
         <div class="card h-100">
           <img src="./aboba.jpg" class="card-img-top" alt="News Photo" />
-          <div class="card-body">
-            <h5 class="card-title">Title</h5>
-            <p class="card-text">Text</p>
+          <div class="card-body" v-for="news in newsList" :key="news.id">
+            <h5 class="card-title">{{news.newsName}}</h5>
+            <p class="card-text">{{news.newsDescription}}</p>
           </div>
         </div>
       </div>
@@ -27,8 +27,29 @@
 </template>
 
 <script>
+import { ref, onMounted } from 'vue';
 export default {
-  name: "GridNews"}
+  name: "GridNews",
+  data() {
+    return {
+      newsList: [] 
+    };
+  }
+}
+  
+
+const newsList = ref([]);
+
+const fetchNews = async () => {
+    try {
+        const response = await fetch("http://localhost:3000/news");
+        const data = await response.json();
+        console.log("Fetched News Data:", data); // Debugging log
+        newsList.value = data;
+    } catch (error) {
+        console.error("Error fetching news:", error);
+    }
+};
 </script>
 
 <style>
