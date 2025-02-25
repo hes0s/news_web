@@ -1,7 +1,7 @@
 <template>
   <div class="all">
     <!-- Highlight the Latest News -->
-    <div  class="card mb-3 mx-auto mt-5" style="width: 800px; height: 500px">
+    <div class="card mb-3 mx-auto mt-5" style="width: 800px; height: 500px">
       <img src="./aboba.jpg" class="card-img-top" alt="Latest News Photo" />
       <div class="card-body">
         <h4 class="card-sub-title">Noutatea zilei</h4>
@@ -13,12 +13,12 @@
 
     <!-- Grid of Other News -->
     <div class="row row-cols-1 row-cols-md-3 g-4 mx-auto" style="width: 800px">
-      <div class="col">
+      <div class="col" v-for="news in newsList" :key="news.id">
         <div class="card h-100">
           <img src="./aboba.jpg" class="card-img-top" alt="News Photo" />
-          <div class="card-body" v-for="news in newsList" :key="news.id">
-            <h5 class="card-title">{{news.newsName}}</h5>
-            <p class="card-text">{{news.newsDescription}}</p>
+          <div class="card-body">
+            <h5 class="card-title">{{ news.newsName }}</h5>
+            <p class="card-text">{{ news.newsDescription }}</p>
           </div>
         </div>
       </div>
@@ -27,28 +27,29 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted } from 'vue'; // ✅ Make sure you import correctly
+
 export default {
   name: "GridNews",
-  data() {
-    return {
-      newsList: [] 
-    };
-  }
-}
-  
+  setup() {
+    const newsList = ref([]); // ✅ Define reactive state
 
-const newsList = ref([]);
-
-const fetchNews = async () => {
-    try {
-        const response = await fetch("http://localhost:3000/news");
+    const fetchNews = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/news"); // ✅ Fetch data
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
         const data = await response.json();
-        console.log("Fetched News Data:", data); // Debugging log
+        console.log("Fetched News Data:", data);
         newsList.value = data;
-    } catch (error) {
+      } catch (error) {
         console.error("Error fetching news:", error);
-    }
+      }
+    };
+
+    onMounted(fetchNews); // ✅ Fetch news when the component is mounted
+
+    return { newsList }; // ✅ Return reactive state
+  }
 };
 </script>
 
