@@ -5,8 +5,8 @@ from aiogram import Bot, Dispatcher, F, types
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import Message
-from pymongo import MongoClient
-from dotenv import load_dotenv 
+from dotenv import load_dotenv
+from db import conn, cursor  # Import database connection
 
 # Load environment variables
 load_dotenv()
@@ -16,13 +16,6 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 bot = Bot(BOT_TOKEN)
 dp = Dispatcher()
 
-# MongoDB Connection
-MONGO_URI = os.getenv("MONGO_URI")
-client = MongoClient(MONGO_URI)
-db = client["news_info"]
-user_collection = db["info"]
-print("connected to MongoDB")
-print(os.getenv("MONGO_URI"))
 # FSM States
 class FormFSM(StatesGroup):
     name = State()
@@ -44,35 +37,34 @@ async def add(message: Message, state: FSMContext):
 # Process Name
 @dp.message(FormFSM.name)
 async def process_name(message: Message, state: FSMContext):
-    await state.update_data(name=message.text)  
+    await state.update_data(name=message.text)
     await state.set_state(FormFSM.description)
     await message.answer("Enter description:")
 
 # Process Description
 @dp.message(FormFSM.description)
 async def process_description(message: Message, state: FSMContext):
-    await state.update_data(description=message.text)  
+    await state.update_data(description=message.text)
     await state.set_state(FormFSM.photo)
     await message.answer("Send a photo:")
 
 # Process Photo
 @dp.message(FormFSM.photo, F.content_type == types.ContentType.PHOTO)
 async def process_photo(message: Message, state: FSMContext):
-    data = await state.get_data()  # Retrieve saved name and description
+    data = await state.get_data()
 
     name = data.get("name")
     description = data.get("description")
-    file_id = message.photo[-1].file_id  # Get highest quality image
+    file_id = message.photo[-1].file_id  
 
-    # Save to MongoDB
-    user_collection.insert_one({
-        "user_id": message.from_user.id,
-        "name": name,
-        "description": description,
-        "photo_id": file_id
-    })
+    # Save to SQLite
+    cursor.execute(
+        "INSERT INTO news ( newsName, newsDesription, IMG_URL) VALUES (?, ?, ?)",
+        ( name, description, file_id),
+    )
+    conn.commit()
 
-    await message.answer("News added successfully! ✅")
+    await message.answer("News added successfully!")
     await state.clear()
 
 # Run the bot

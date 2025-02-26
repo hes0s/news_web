@@ -1,15 +1,9 @@
-import pymysql
+import sqlite3
 
-# Establish a connection
-conn = pymysql.connect(
-    host="sql311.infinityfree.com",
-    user="if0_38291971",
-    password="G2EqQzOrvL0xd",
-    database="if0_38291971_wweb_news_site"
-)
+conn = sqlite3.connect('/Users/cusnircristian/Desktop/news_web/web_news/server/database.db')
+if conn==True:
+    print("Connected")
 
 cursor = conn.cursor()
-for table in cursor:
-    print(table)
 
 

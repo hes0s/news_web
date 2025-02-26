@@ -3,8 +3,8 @@ const cors = require("cors"); // ✅ Import CORS
 const sqlite3 = require("sqlite3").verbose();
 
 const app = express();
-app.use(cors()); // ✅ Allow frontend requests
-app.use(express.json()); // ✅ Parse JSON
+app.use(cors());
+app.use(express.json()); 
 
 const db = new sqlite3.Database("./database.db", (err) => {
   if (err) {
@@ -20,6 +20,13 @@ app.get("/news", (req, res) => {
         res.status(500).json({ error: "Database query failed" });
         return;
       }
+
+      rows.forEach(row => {
+        if (row.IMG_URL && !row.IMG_URL.endsWith(".jpg")) {
+           row.IMG_URL += ".jpg"
+        }
+        row.IMG_URL = `http://localhost:3000${row.IMG_URL}`;
+    });
       res.json(rows);
     });
 });

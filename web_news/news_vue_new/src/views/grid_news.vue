@@ -15,7 +15,7 @@
     <div class="row row-cols-1 row-cols-md-3 g-4 mx-auto" style="width: 800px">
       <div class="col" v-for="news in newsList" :key="news.id">
         <div class="card h-100">
-          <img src="./aboba.jpg" class="card-img-top" alt="News Photo" />
+          <img v-if="news.photo" :src="news.photo" alt="News Image">
           <div class="card-body">
             <h5 class="card-title">{{ news.newsName }}</h5>
             <p class="card-text">{{ news.newsDescription }}</p>
@@ -27,16 +27,16 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'; // ✅ Make sure you import correctly
+import { ref, onMounted } from 'vue';
 
 export default {
   name: "GridNews",
   setup() {
-    const newsList = ref([]); // ✅ Define reactive state
+    const newsList = ref([]); 
 
     const fetchNews = async () => {
       try {
-        const response = await fetch("http://localhost:3000/news"); // ✅ Fetch data
+        const response = await fetch("http://localhost:3000/news"); 
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
         const data = await response.json();
         console.log("Fetched News Data:", data);
@@ -46,9 +46,9 @@ export default {
       }
     };
 
-    onMounted(fetchNews); // ✅ Fetch news when the component is mounted
+    onMounted(fetchNews); 
 
-    return { newsList }; // ✅ Return reactive state
+    return { newsList };
   }
 };
 </script>
