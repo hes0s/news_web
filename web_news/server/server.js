@@ -25,7 +25,7 @@ app.get("/news", (req, res) => {
         if (row.IMG_URL && !row.IMG_URL.endsWith(".jpg")) {
            row.IMG_URL += ".jpg"
         }
-        row.IMG_URL = `http://localhost:3000${row.IMG_URL}`;
+        row.IMG_URL = `http://localhost:3000/${row.IMG_URL}`;
     });
       res.json(rows);
     });

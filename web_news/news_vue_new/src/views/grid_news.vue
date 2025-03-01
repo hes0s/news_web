@@ -15,10 +15,10 @@
     <div class="row row-cols-1 row-cols-md-3 g-4 mx-auto" style="width: 800px">
       <div class="col" v-for="news in newsList" :key="news.id">
         <div class="card h-100">
-          <img v-if="news.photo" :src="news.photo" alt="News Image">
+          <img v-if="news.IMG_URL" :src="news.photo" alt="News Image">
           <div class="card-body">
             <h5 class="card-title">{{ news.newsName }}</h5>
-            <p class="card-text">{{ news.newsDescription }}</p>
+            <p class="card-text">{{ news.newsDesription }}</p>
           </div>
         </div>
       </div>
@@ -33,7 +33,6 @@ export default {
   name: "GridNews",
   setup() {
     const newsList = ref([]); 
-
     const fetchNews = async () => {
       try {
         const response = await fetch("http://localhost:3000/news"); 
@@ -45,7 +44,6 @@ export default {
         console.error("Error fetching news:", error);
       }
     };
-
     onMounted(fetchNews); 
 
     return { newsList };

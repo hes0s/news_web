@@ -7,6 +7,8 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import Message
 from dotenv import load_dotenv
 from db import conn, cursor  # Import database connection
+from PIL import Image
+import os
 
 # Load environment variables
 load_dotenv()
@@ -49,25 +51,36 @@ async def process_description(message: Message, state: FSMContext):
     await message.answer("Send a photo:")
 
 # Process Photo
+# Process Photo
 @dp.message(FormFSM.photo, F.content_type == types.ContentType.PHOTO)
 async def process_photo(message: Message, state: FSMContext):
     data = await state.get_data()
-
     name = data.get("name")
     description = data.get("description")
     file_id = message.photo[-1].file_id  
 
-    # Save to SQLite
+    # Creează directorul dacă nu există
+    directory = './static'
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+    # Descarcă poza
+    file_info = await bot.get_file(file_id)
+    file_path = file_info.file_path
+    file_name = f"{file_id}.jpg"
+    save_path = os.path.join(directory, file_name)
+
+    await bot.download_file(file_path, save_path)  # Salvează poza local
+
+    # Salvează în baza de date
     cursor.execute(
-        "INSERT INTO news ( newsName, newsDesription, IMG_URL) VALUES (?, ?, ?)",
-        ( name, description, file_id),
+        "INSERT INTO news (newsName, newsDesription, IMG_URL) VALUES (?, ?, ?)",
+        (name, description, file_name),  # Stochezi doar numele fișierului, nu `file_id`
     )
     conn.commit()
 
     await message.answer("News added successfully!")
     await state.clear()
-
-# Run the bot
 async def main():
     logging.basicConfig(level=logging.INFO)
     await dp.start_polling(bot)
