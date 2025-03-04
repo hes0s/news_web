@@ -1,5 +1,6 @@
 import os
 import logging
+import time
 import asyncio
 from aiogram import Bot, Dispatcher, F, types
 from aiogram.fsm.context import FSMContext
@@ -8,7 +9,7 @@ from aiogram.types import Message
 from dotenv import load_dotenv
 from db import conn, cursor  # Import database connection
 from PIL import Image
-import os
+
 
 # Load environment variables
 load_dotenv()
@@ -59,23 +60,27 @@ async def process_photo(message: Message, state: FSMContext):
     description = data.get("description")
     file_id = message.photo[-1].file_id  
 
-    # Creează directorul dacă nu există
-    directory = './static'
+    # Create directory if it doesn't exist
+    directory = './web_news/python/photos'
     if not os.path.exists(directory):
-        os.makedirs(directory)
+        os.mkdir(directory)
+        print("Directory created:", directory)
 
-    # Descarcă poza
+    # Get file information from Telegram
     file_info = await bot.get_file(file_id)
-    file_path = file_info.file_path
-    file_name = f"{file_id}.jpg"
-    save_path = os.path.join(directory, file_name)
+    remote_file_path = file_info.file_path
 
-    await bot.download_file(file_path, save_path)  # Salvează poza local
+    timestamp = int(time.time())
+    new_filename = f"photo_{message.from_user.id}_{timestamp}.jpg"
+    local_file_path = os.path.join(directory, new_filename)
 
-    # Salvează în baza de date
+    # Download the file from Telegram and save it locally using the new file name
+    await bot.download_file(remote_file_path, local_file_path)
+
+    # Save the record in the database, storing the local file path
     cursor.execute(
         "INSERT INTO news (newsName, newsDesription, IMG_URL) VALUES (?, ?, ?)",
-        (name, description, file_name),  # Stochezi doar numele fișierului, nu `file_id`
+        (name, description, local_file_path),
     )
     conn.commit()
 
