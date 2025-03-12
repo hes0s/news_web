@@ -9,8 +9,7 @@ from aiogram.types import Message
 from dotenv import load_dotenv
 from db import conn, cursor  # Import database connection
 from PIL import Image
-
-
+import re
 # Load environment variables
 load_dotenv()
 
@@ -51,10 +50,9 @@ async def process_description(message: Message, state: FSMContext):
     await state.set_state(FormFSM.photo)
     await message.answer("Send a photo:")
 
-# Process Photo
-# Process Photo
 @dp.message(FormFSM.photo, F.content_type == types.ContentType.PHOTO)
 async def process_photo(message: Message, state: FSMContext):
+    
     data = await state.get_data()
     name = data.get("name")
     description = data.get("description")
@@ -65,13 +63,17 @@ async def process_photo(message: Message, state: FSMContext):
     if not os.path.exists(directory):
         os.mkdir(directory)
         print("Directory created:", directory)
+        
 
     # Get file information from Telegram
     file_info = await bot.get_file(file_id)
     remote_file_path = file_info.file_path
-
-    timestamp = int(time.time())
-    new_filename = f"photo_{message.from_user.id}_{timestamp}.jpg"
+    
+    existing_files = [f for f in os.listdir(directory) if re.match(r'photo_(\d)+.jpg', f)]
+    existing_numbers = [int(re.findall(r'\d+', f)[0]) for f in existing_files]
+    i = max(existing_numbers) + 1 if existing_numbers else 1
+    # Generate a new file name
+    new_filename = f"photo_{i}.jpg"
     local_file_path = os.path.join(directory, new_filename)
 
     # Download the file from Telegram and save it locally using the new file name
@@ -79,13 +81,14 @@ async def process_photo(message: Message, state: FSMContext):
 
     # Save the record in the database, storing the local file path
     cursor.execute(
-        "INSERT INTO news (newsName, newsDesription, IMG_URL) VALUES (?, ?, ?)",
-        (name, description, local_file_path),
+         "INSERT INTO news (newsName, newsDesription, IMG_URL) VALUES (?, ?, ?)",
+        (name, description, remote_file_path),
     )
     conn.commit()
 
     await message.answer("News added successfully!")
     await state.clear()
+
 async def main():
     logging.basicConfig(level=logging.INFO)
     await dp.start_polling(bot)

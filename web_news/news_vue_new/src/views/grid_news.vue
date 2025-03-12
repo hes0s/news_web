@@ -15,7 +15,7 @@
     <div class="row row-cols-1 row-cols-md-3 g-4 mx-auto" style="width: 800px">
       <div class="col" v-for="news in newsList" :key="news.id">
         <div class="card h-100">
-          <img v-if="news.IMG_URL" :src="news.photo" alt="News Image">
+          <img id="imgContainer" v-if="news.IMG_URL" :src="news.photo" alt="News Image">
           <div class="card-body">
             <h5 class="card-title">{{ news.newsName }}</h5>
             <p class="card-text">{{ news.newsDesription }}</p>
@@ -25,7 +25,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import { ref, onMounted } from 'vue';
 
@@ -49,6 +48,13 @@ export default {
     return { newsList };
   }
 };
+
+const imgContainer = document.getElementById("imgContainer");
+const nrImg = 5;
+
+for(let i; i <= 1; i++){
+  
+}
 </script>
 
 <style>
