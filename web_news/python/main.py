@@ -7,43 +7,38 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import Message
 from dotenv import load_dotenv
-from db import conn, cursor  # Import database connection
+from db import conn, cursor
 from PIL import Image
 import re
-# Load environment variables
+
 load_dotenv()
 
-# Bot & Dispatcher
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 bot = Bot(BOT_TOKEN)
 dp = Dispatcher()
 
-# FSM States
 class FormFSM(StatesGroup):
     name = State()
     description = State()
     photo = State()
 
-# Command: Start
 @dp.message(F.text == "/start")
 async def cmd_start(message: Message):
     await message.answer("Hello! Use /add to enter adding mode.")
 
-# Start FSM Process
 @dp.message(F.text == "/add")
 async def add(message: Message, state: FSMContext):
     await message.answer("You entered adding mode. Please follow the instructions.")
     await state.set_state(FormFSM.name)
     await message.answer("Enter name:")
 
-# Process Name
+
 @dp.message(FormFSM.name)
 async def process_name(message: Message, state: FSMContext):
     await state.update_data(name=message.text)
     await state.set_state(FormFSM.description)
     await message.answer("Enter description:")
 
-# Process Description
 @dp.message(FormFSM.description)
 async def process_description(message: Message, state: FSMContext):
     await state.update_data(description=message.text)
